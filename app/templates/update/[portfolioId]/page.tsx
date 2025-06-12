@@ -14,28 +14,51 @@ type PortfolioForm = {
   title: string;
   bio: string;
   projects: Project[];
-  template: string;
-  userId?: string; // ✅ Add this line
+
+  userId?: string; 
 };
 
 type TemplateNames = 'classic' | 'modern' | 'minimal';
 
-export default function EditPortfolioForm({ params }: { params: Promise<{ template: TemplateNames }> }) {
+export default function EditPortfolioForm({ params }: { params: Promise<{ portfolioId: string }> }) {
   const router = useRouter();
-  const { template } = use(params); 
+  const { portfolioId } = use(params); 
   const [userId, setUserId] = useState<string | null>(null); 
   const [form, setForm] = useState<PortfolioForm>({
     title: '',
     bio: '',
-    projects: [{ name: '', description: '' }],
-    template: template || 'classic', 
+    projects: [{ name: '', description: '' }], 
   });
-  const [username , setUserName] = useState('')
+  const [userName , setUserName] = useState('')
   const [loading, setLoading] = useState(false);
  
  console.log("from template page.tsx",userId)
 
+  useEffect(() => {
+    async function fetchPortfolio() {
+      try {
+        const res = await fetch(`/api/portfolio/${userName}/${portfolioId}`);
+        const {result} = await res.json();
+        console.log("data from update" , result[0])
+       if (res.ok) {
+        const safeProjects = Array.isArray(result[0].projects) ? result[0].projects : [{ name: '', description: '' }];
+        setForm({
+          title: result[0].title || '',
+          bio: result[0].bio || '',
+          projects: safeProjects,
+        
+          userId: result[0].userId || userId, // optional
+        });
+      }
+      } catch (error) {
+        console.error('Error loading portfolio:', error);
+      }
+    }
 
+    if(userName){
+      fetchPortfolio();
+    }
+  }, [userName]);
   useEffect(() => {
       const fetchUser = async () => {
         const res = await fetch('/api/auth/loginuser');
@@ -47,7 +70,6 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ templa
       };
       fetchUser();
     }, []);
-
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -73,26 +95,26 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ templa
       return;
     }
     const res = await fetch('/api/portfolio', {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...form, userId }),
+    body: JSON.stringify({ ...form, portfolioId   }),
     })
 
     setLoading(false);
 
     if (res.ok) {
-      router.push("/templates/myportfolio");
+      router.push(`/${userName}/${portfolioId}`);
     } else {
       alert('Failed to save. Please try again.');
     }
   };
-console.log("here is the username " , username)
-console.log(form.projects)
+
+
 
   return (
    <div>
      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Build Your Portfolio</h1>
+      <h1 className="text-2xl font-bold">Update Your Portfolio</h1>
 
       <input
         name="title"

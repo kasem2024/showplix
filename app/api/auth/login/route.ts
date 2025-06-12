@@ -7,10 +7,9 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function POST(req: NextRequest) {
   try {
-    // const { email, password } = await req.json();
-    const email = "kasem2023mohareb@gmail.com"
-    const password = "123"
-    const user = await prisma.user.findUnique({ where: { email } });
+    const { username, password } = await req.json();
+
+    const user = await prisma.user.findUnique({ where: { username } });
     if (!user) return NextResponse.json({ error: 'Wrong Email' }, { status: 401 });
 
     const isValid = await bcrypt.compare(password, user.password);

@@ -81,7 +81,7 @@ return (
       <div className="max-w-5xl w-full flex flex-col justify-center items-center">
         <h2 className="text-4xl font-semibold mb-6 text-center border-b pb-3 max-w-xl mx-auto">Projects</h2>
         <div className="grid md:grid-cols-2 gap-6 w-full overflow-y-auto max-h-[50vh]">
-          {projects.map((project, i) => (
+          {projects?.map((project, i) => (
             <div
               key={i}
               className="border rounded-lg p-5 shadow hover:shadow-xl transition flex flex-col"
@@ -120,7 +120,7 @@ return (
       <div className="max-w-3xl w-full flex flex-col justify-center items-center">
         <h2 className="text-4xl font-semibold mb-6 border-b pb-3 w-full text-center">Skills</h2>
         <ul className="flex flex-wrap justify-center gap-6">
-          {skills.map((skill, i) => (
+          {skills?.map((skill, i) => (
             <li
               key={i}
               className="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold shadow-lg cursor-default select-none"
@@ -145,7 +145,7 @@ return (
       <div className="max-w-md w-full flex flex-col justify-center items-center">
         <h2 className="text-4xl font-semibold mb-6 border-b border-white pb-3 w-full text-center">Contact</h2>
         <ul className="space-y-4 text-lg w-full text-center">
-          {contact.email && (
+          {contact?.email && (
             <li>
               Email:{' '}
               <a href={`mailto:${contact.email}`} className="underline hover:text-indigo-300">
@@ -153,8 +153,8 @@ return (
               </a>
             </li>
           )}
-          {contact.phone && <li>Phone: {contact.phone}</li>}
-          {contact.website && (
+          {contact?.phone && <li>Phone: {contact.phone}</li>}
+          {contact?.website && (
             <li>
               Website:{' '}
               <a
@@ -167,7 +167,7 @@ return (
               </a>
             </li>
           )}
-          {contact.linkedin && (
+          {contact?.linkedin && (
             <li>
               LinkedIn:{' '}
               <a
@@ -180,7 +180,7 @@ return (
               </a>
             </li>
           )}
-          {contact.github && (
+          {contact?.github && (
             <li>
               GitHub:{' '}
               <a

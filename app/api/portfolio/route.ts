@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
-
+/// Retrun the Login User Data
 export async function GET(req: NextRequest) {
   try {
     // 1. Get token from cookies
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     // 4. Fetch user from DB
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      include: { portfolio: true }, // Include related data if needed
+      include: { portfolios: true }, // Include related data if needed
     });
 
     if (!user) {
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     }
 
     // 5. Return user data
-    return NextResponse.json({ status: 200, data: user });
+    return NextResponse.json({ status: 200, results: user.portfolios });
   } catch (error) {
     console.error("Auth error:", error);
     return NextResponse.json(
@@ -46,6 +46,7 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+/// Creates New Portfolio
 export async function POST(req: NextRequest) {
   try {
 
@@ -66,13 +67,15 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+/// Update Existed Portfolio
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, title, bio, projects, template } = body;
+    const { portfolioId, title, bio, projects, template } = body;
 
     // Validate required fields
-    if (!id) {
+    if (!portfolioId) {
       return NextResponse.json(
         { success: false, error: 'Portfolio ID is required' },
         { status: 400 }
@@ -80,7 +83,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const updatedPortfolio = await prisma.portfolio.update({
-      where: { id },
+      where: { id:portfolioId },
       data: {
         title,
         bio,
@@ -98,11 +101,13 @@ export async function PUT(req: NextRequest) {
     );
   }
 }
+
+//// Delete Existed Portfolio
 export async function DELETE(req: NextRequest) {
   try {
     const body = await req.json();
     const { id } = body;
-
+   console.log("here is the id from deleteeleleleleelelelelele" , id)
     if (!id) {
       return NextResponse.json(
         { success: false, error: 'Portfolio ID is required' },

@@ -4,13 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 ///   GET A Specific Portfolio For A Specific Public User
 
-export async  function GET(req:NextRequest , {params}:{params:{username:string}}){
+export async function GET(req:NextRequest , {params}:{params:{username:string, portfolioId:string}}){
 
 try{
-  const {username} = params
+  const {username , portfolioId} = params
   const user = await prisma.user.findUnique({
       where:{username},
-      include:{portfolios:true}   
+      include:{portfolios: {
+        where: { id: portfolioId },
+      },}
   })
    if(user){
      return NextResponse.json({status:true , result:user?.portfolios})

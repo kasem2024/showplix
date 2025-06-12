@@ -33,7 +33,7 @@ const items = [
     icon: LayoutPanelTop,
   },
   {
-    title: "portfolio",
+    title: "portfolios",
     url: "/templates/myportfolio",
     icon: BriefcaseBusiness,
   },
@@ -49,6 +49,8 @@ export function AppSidebar() {
             const data = await res.json();
     
             setUserName(data.user?.username)
+          }else{
+            router.push("/login")
           }
         };
         fetchUser();

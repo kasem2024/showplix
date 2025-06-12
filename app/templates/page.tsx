@@ -39,7 +39,7 @@ const TemplatesList = () => {
               <p className="text-gray-600 mb-4">{description}</p>
               <div className="flex justify-between">
                 <Link href={`/livedemo/${name}`}>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                  <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
                     View Demo
                   </button>
                 </Link>

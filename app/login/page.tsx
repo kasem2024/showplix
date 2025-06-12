@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { apiClient } from "@/lib/apiClient";
@@ -12,6 +12,19 @@ export default function LoginPage() {
     password: "",
   });
 
+    useEffect(() => {
+        const fetchUser = async () => {
+          const res = await fetch('/api/auth/loginuser');
+          if (res.ok) {
+            const data = await res.json();
+    
+           router.push('/templates')
+          }else{
+            router.push("/login")
+          }
+        };
+        fetchUser();
+      }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
