@@ -50,11 +50,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
 
-    const { title, bio, projects, template, userId } = await req.json();
+    const { title, bio, projects, template, userId,contacts,skills } = await req.json();
     console.log(userId , bio , title ,projects)
     const portfolio = await prisma.portfolio.create({
       data: {
-        title , bio , projects , template , userId
+        title , bio , projects , template , userId,contacts,skills,
       },
     });
 

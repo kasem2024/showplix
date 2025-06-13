@@ -16,11 +16,25 @@ model User {
   createdAt  DateTime   @default(now())
 }
 
+// model Portfolio {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   title     String
+//   bio       String
+//   projects  Json
+//   template  String   @default("classic")
+//   userId    String   @db.ObjectId
+//   user      User     @relation(fields: [userId], references: [id])
+//   createdAt DateTime @default(now())
+// }
+
+
 model Portfolio {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   bio       String
-  projects  Json
+  projects  Json     // Array of Project objects
+  skills    Json     // Array of Skill objects
+  contacts  Json     // Array of Contact objects
   template  String   @default("classic")
   userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id])
