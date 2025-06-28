@@ -3,7 +3,24 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { apiClient } from "@/lib/apiClient";
+import { AxiosResponse } from "axios";
 
+
+
+type Form = {
+ username:string,
+ email:string,
+ password:string
+}
+type RegisteredUser ={
+  id:string,
+  email:string,
+  username:string,
+}
+type RegisterResponse = {
+  success:boolean,
+  user:RegisteredUser
+}
 export default function RegisterPage() {
   const router = useRouter();
   const [form, setForm] = useState({
@@ -20,15 +37,15 @@ export default function RegisterPage() {
     e.preventDefault();
 
     try {
-      const res = await apiClient.post<any , any>("/api/auth/register", form);
+      const res = await apiClient.post<RegisterResponse, AxiosResponse<RegisterResponse>, Form>("/api/auth/register", form);
    
       if (res?.statusText === "OK") {
         router.push("/login");
       } else {
-        const error = await res
-        alert(error.message || "Registration failed.");
+        alert( "Registration failed.");
       }
     } catch (err) {
+      console.error(err)
       alert("Something went wrong.");
     }
   };

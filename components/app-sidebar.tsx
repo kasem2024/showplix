@@ -1,5 +1,5 @@
 'use client'
-import {  Home, BriefcaseBusiness ,LayoutPanelTop, ChevronUp, User2   } from "lucide-react"
+import { BriefcaseBusiness ,LayoutPanelTop, ChevronUp, User2   } from "lucide-react"
 
 import {
   Sidebar,
@@ -8,7 +8,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
+
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -19,8 +19,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useEffect, useState } from "react";
@@ -57,9 +56,10 @@ export function AppSidebar() {
       }, []);
 
     const handleLogout = async()=>{
-      const res = await fetch('/api/auth/logout',{
+        await fetch('/api/auth/logout',{
         method:"post",
       })
+
      router.push("/login")
     }
   return (

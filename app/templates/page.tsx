@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { div } from 'framer-motion/client';
+
 
 type TemplateNames = "classic" | "modern" | "minimal";
 

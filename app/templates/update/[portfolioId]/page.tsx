@@ -214,7 +214,7 @@ type PortfolioForm = {
   userId?: string;
 };
 
-type TemplateNames = 'classic' | 'modern' | 'minimal';
+// type TemplateNames = 'classic' | 'modern' | 'minimal';
 
 export default function EditPortfolioForm({ params }: { params: Promise<{ portfolioId: string }> }) {
   const router = useRouter();
@@ -412,7 +412,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
                 className="p-2 border rounded"
               >
                 <option value="">Select Icon</option>
-                {Array.from({ length: 30 }).map((_, index) => (
+                {Array.from({ length: 6 }).map((_, index) => (
                   <option key={index} value={`skill${index + 1}.png`}>
                     skill{index + 1}.png
                   </option>

@@ -1,6 +1,5 @@
 'use client'
 import PortfolioCard, { Portfolio } from "@/components/portfolioCard";
-import { div, p } from "framer-motion/client";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

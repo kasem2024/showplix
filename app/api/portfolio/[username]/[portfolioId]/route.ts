@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 ///   GET A Specific Portfolio For A Specific Public User
 
-export async function GET(req:NextRequest , {params}:{params:{username:string, portfolioId:string}}){
-
+export async function GET(req:NextRequest , context:{ params: Promise<{ username: string; portfolioId: string }> }){
+ console.log(req)
 try{
-  const {username , portfolioId} = params
+  const {username , portfolioId} = await context.params
   const user = await prisma.user.findUnique({
       where:{username},
       include:{portfolios: {
@@ -21,6 +21,7 @@ try{
     return NextResponse.json({status:404 , messge:'Not found'})
    }
 }catch(error){
+   console.error(error);
    return NextResponse.json({status:500 ,  message:"internal server error"})
   }
 }

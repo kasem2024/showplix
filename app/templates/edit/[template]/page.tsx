@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+
 
 type Project = {
   name: string;
@@ -149,7 +149,7 @@ const handleImageUpload = async (
       alert('Failed to save. Please try again.');
     }
   };
-
+  console.log(form , username)
   return (
     <div>
       <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 space-y-4">
@@ -233,9 +233,9 @@ const handleImageUpload = async (
                 className="p-2 border rounded"
               >
                 <option value="">Select Icon</option>
-                {Array.from({ length: 30 }).map((_, index) => (
+                {Array.from({ length: 6 }).map((_, index) => (
                   <option key={index} value={`skill${index + 1}.png`}>
-                    skill{index + 1}.png
+                     <div>  skill{index + 1}.png</div>
                   </option>
                 ))}
               </select>

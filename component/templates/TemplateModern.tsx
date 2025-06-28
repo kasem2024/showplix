@@ -12,7 +12,7 @@ type Project = {
 
 type Skill = {
   name: string;
-  level?: string; // e.g. Beginner, Intermediate, Expert
+  icon?: string; // e.g. Beginner, Intermediate, Expert
 };
 
 type ContactInfo = {
@@ -47,13 +47,13 @@ export default function ModernTemplate({ title, bio, projects, skills, contacts 
       <motion.section className="mb-14" variants={fadeUp} initial="hidden" animate="visible">
         <h2 className="text-3xl font-semibold mb-6">Featured Projects</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
+          {projects?.map((project, idx) => (
             <motion.div key={idx} className="bg-white rounded-xl shadow-lg p-5" whileHover={{ scale: 1.03 }}>
-              <img src={project.image} alt={project.name} className="rounded-md h-40 w-full object-cover mb-4" />
-              <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-              <p className="text-sm text-gray-700 mb-2">{project.description}</p>
-              {project.link && (
-                <a href={project.link} className="text-indigo-600 hover:underline text-sm" target="_blank">Learn more</a>
+              <img src={project?.image} alt={project?.name} className="rounded-md h-40 w-full object-cover mb-4" />
+              <h3 className="text-xl font-bold mb-2">{project?.name}</h3>
+              <p className="text-sm text-gray-700 mb-2">{project?.description}</p>
+              {project?.link && (
+                <a href={project?.link} className="text-indigo-600 hover:underline text-sm" target="_blank">Learn more</a>
               )}
             </motion.div>
           ))}
@@ -63,10 +63,20 @@ export default function ModernTemplate({ title, bio, projects, skills, contacts 
       <motion.section className="mb-14" variants={fadeUp} initial="hidden" animate="visible">
         <h2 className="text-3xl font-semibold mb-6">Skills</h2>
         <div className="flex flex-wrap gap-4">
-          {skills.map((skill, i) => (
-            <span key={i} className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium">
-              {skill.name}{skill.level ? ` (${skill.level})` : ''}
-            </span>
+            {skills?.map((skill, i) => (
+            <li
+              key={i}
+              className="bg-black text-white px-5 py-2 rounded-full font-semibold shadow-lg cursor-default select-none"
+              title={skill?.icon}
+            >
+             
+             
+             <div className='flex items-center justify-center gap-x-3'>
+              <p> {skill?.name}</p>
+               <img  className=' w-[30px] h-[30px] rounded-full' src={`/skills/${skill?.icon}`} alt="" />
+             </div>
+            </li>
+
           ))}
         </div>
       </motion.section>
@@ -76,20 +86,20 @@ export default function ModernTemplate({ title, bio, projects, skills, contacts 
         <ul className="space-y-4 text-lg w-full text-center">
           {
             contacts.map((contact , i)=>{
-              if(contact.type === "email")
+              if(contact?.type === "email")
                     return(
-                      <li>
-                          {contact.type}:{' '}
-                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
-                            {contact.value}
+                      <li key={i}>
+                          {contact?.type}:{' '}
+                          <a href={`mailto:${contact?.value}`} className="underline hover:text-indigo-300">
+                            {contact?.value}
                           </a>
                         </li>
                     )
               return (
-                 <li>
-                      {contact.type}:{' '}
-                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
-                        {contact.value}
+                 <li key={i}>
+                      {contact?.type}:{' '}
+                      <a href={`${contact?.link}`} className="underline hover:text-indigo-300">
+                        {contact?.value}
                       </a>
                     </li>
               )

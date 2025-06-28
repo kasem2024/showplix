@@ -13,7 +13,7 @@ type Project = {
 
 type Skill = {
   name: string;
-  level?: string; // e.g. Beginner, Intermediate, Expert
+  icon?: string; // e.g. Beginner, Intermediate, Expert
 };
 
 type ContactInfo = {
@@ -33,7 +33,7 @@ type PortfolioTemplateProps = {
 
 
 export default function MinimalTemplate({ title, bio, projects, skills, contacts }: PortfolioTemplateProps) {
-  console.log("sdfsfssdfs",contacts[0].type)
+  console.log("sdfsfssdfs",contacts[0]?.type)
   return (
     <div className="min-h-screen bg-white text-gray-800 p-8 font-sans">
       <header className="text-center mb-12">
@@ -44,12 +44,12 @@ export default function MinimalTemplate({ title, bio, projects, skills, contacts
       <section className="mb-10">
         <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Projects</h2>
         <ul className="space-y-6">
-          {projects.map((proj, idx) => (
+          {projects?.map((proj, idx) => (
             <li key={idx} className="border-b pb-4">
-              <h3 className="text-xl font-medium">{proj.name}</h3>
-              <p className="text-sm text-gray-600">{proj.description}</p>
-              {proj.link && (
-                <a href={proj.link} className="text-blue-600 text-sm" target="_blank" rel="noreferrer">
+              <h3 className="text-xl font-medium">{proj?.name}</h3>
+              <p className="text-sm text-gray-600">{proj?.description}</p>
+              {proj?.link && (
+                <a href={proj?.link} className="text-blue-600 text-sm" target="_blank" rel="noreferrer">
                   Visit
                 </a>
               )}
@@ -61,10 +61,20 @@ export default function MinimalTemplate({ title, bio, projects, skills, contacts
       <section className="mb-10">
         <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Skills</h2>
         <ul className="flex flex-wrap gap-4">
-          {skills.map((skill, idx) => (
-            <li key={idx} className="text-sm px-3 py-1 border rounded">
-              {skill.name}{skill.level ? ` (${skill.level})` : ''}
+            {skills?.map((skill, i) => (
+            <li
+              key={i}
+              className="bg-black text-white px-5 py-2 rounded-full font-semibold shadow-lg cursor-default select-none"
+              title={skill?.icon}
+            >
+             
+             
+             <div className='flex items-center justify-center gap-x-3'>
+              <p> {skill?.name}</p>
+               <img  className=' w-[30px] h-[30px] rounded-full' src={`/skills/${skill?.icon}`} alt="" />
+             </div>
             </li>
+
           ))}
         </ul>
       </section>
@@ -73,21 +83,21 @@ export default function MinimalTemplate({ title, bio, projects, skills, contacts
         <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Contact</h2>
        <ul className="space-y-4 text-lg w-full text-center">
           {
-            contacts.map((contact , i)=>{
-              if(contact.type === "email")
+            contacts?.map((contact , i)=>{
+              if(contact?.type === "email")
                     return(
-                      <li>
-                          {contact.type}:{' '}
-                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
-                            {contact.value}
+                      <li key={i}>
+                          {contact?.type}:{' '}
+                          <a href={`mailto:${contact?.value}`} className="underline hover:text-indigo-300">
+                            {contact?.value}
                           </a>
                         </li>
                     )
               return (
-                 <li>
-                      {contact.type}:{' '}
-                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
-                        {contact.value}
+                 <li key={i}>
+                      {contact?.type}:{' '}
+                      <a href={`${contact?.link}`} className="underline hover:text-indigo-300">
+                        {contact?.value}
                       </a>
                     </li>
               )

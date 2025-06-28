@@ -4,6 +4,21 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { apiClient } from "@/lib/apiClient";
+import { AxiosResponse } from "axios";
+
+
+type Form = {
+  username:string,
+  password:string,
+}
+type User = {
+  id:number ,
+  email:string,
+}
+type LoginResponse = {
+  success:boolean,
+  user:User
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,15 +31,14 @@ export default function LoginPage() {
         const fetchUser = async () => {
           const res = await fetch('/api/auth/loginuser');
           if (res.ok) {
-            const data = await res.json();
-    
+            await res.json();
            router.push('/templates')
           }else{
             router.push("/login")
           }
         };
         fetchUser();
-      }, []);
+      }, [router]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -33,16 +47,16 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await apiClient.post<any, any>("/api/auth/login", form);
+      const res = await apiClient.post<LoginResponse, AxiosResponse<LoginResponse>, Form >("/api/auth/login", form);
 
       if (res?.statusText === "OK") {
         router.push("/templates"); // Redirect after successful login
 
       } else {
-        const error = await res;
-        alert(error.message || "Login failed.");
+        alert( "Login failed.");
       }
     } catch (err) {
+      console.error(err)
       alert("Something went wrong.");
     }
   };

@@ -10,7 +10,7 @@ type Project = {
 
 type Skill = {
   name: string;
-  level?: string; // e.g. Beginner, Intermediate, Expert
+  icon?: string; // e.g. Beginner, Intermediate, Expert
 };
 
 type ContactInfo = {
@@ -46,7 +46,7 @@ export default function PortfolioTemplate({
 
 }: PortfolioTemplateProps) {
 
-  console.log(contacts[0].type)
+  console.log(contacts[0]?.type)
 return (
 
   
@@ -89,15 +89,15 @@ return (
               className="border rounded-lg p-5 shadow hover:shadow-xl transition flex flex-col"
             >
               <img
-                src={project.image }
-                alt={project.name}
+                src={project?.image }
+                alt={project?.name}
                 className="rounded mb-3 object-cover w-full h-28"
               />
-              <h3 className="text-2xl font-bold mb-2">{project.name}</h3>
-              <p className="mb-3 flex-grow">{project.description}</p>
-              {project.link && (
+              <h3 className="text-2xl font-bold mb-2">{project?.name}</h3>
+              <p className="mb-3 flex-grow">{project?.description}</p>
+              {project?.link && (
                 <a
-                  href={project.link}
+                  href={project?.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline mt-auto"
@@ -125,12 +125,17 @@ return (
           {skills?.map((skill, i) => (
             <li
               key={i}
-              className="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold shadow-lg cursor-default select-none"
-              title={skill.level}
+              className="bg-black text-white px-5 py-2 rounded-full font-semibold shadow-lg cursor-default select-none"
+              title={skill?.icon}
             >
-              {skill.name}
-              {skill.level && ` (${skill.level})`}
+             
+             
+             <div className='flex items-center justify-center gap-x-3'>
+              <p> {skill?.name}</p>
+               <img  className=' w-[30px] h-[30px] rounded-full' src={`/skills/${skill?.icon}`} alt="" />
+             </div>
             </li>
+
           ))}
         </ul>
       </div>
@@ -148,21 +153,21 @@ return (
         <h2 className="text-4xl font-semibold mb-6 border-b border-white pb-3 w-full text-center">Contact</h2>
          <ul className="space-y-4 text-lg w-full text-center">
           {
-            contacts.map((contact , i)=>{
-              if(contact.type === "Email")
+            contacts?.map((contact , i)=>{
+              if(contact?.type === "Email")
                     return(
-                      <li>
-                          {contact.type}:{' '}
-                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
-                            {contact.value}
+                      <li key={i}>
+                          {contact?.type}:{' '}
+                          <a href={`mailto:${contact?.value}`} className="underline hover:text-indigo-300">
+                            {contact?.value}
                           </a>
                         </li>
                     )
               return (
-                 <li>
-                      {contact.type}:{' '}
-                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
-                        {contact.value}
+                 <li key={i}>
+                      {contact?.type}:{' '}
+                      <a href={`${contact?.link}`} className="underline hover:text-indigo-300">
+                        {contact?.value}
                       </a>
                     </li>
               )
