@@ -1,4 +1,4 @@
-'use client'
+
 import { templates } from '@/component/templates';
 import Link from 'next/link';
 import React from 'react'

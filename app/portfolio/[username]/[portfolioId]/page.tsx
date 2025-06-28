@@ -1,5 +1,5 @@
 
-// import { templates } from '@/component/templates';
+import { templates } from '@/component/templates';
 import { apiClient } from '@/lib/apiClient';
 
 interface Props {
@@ -39,21 +39,16 @@ export default async  function Page({ params }:Props ) {
   const {username , portfolioId} = params
   const {data:{result}} = await apiClient.get<{ result: PortfolioData[] }>( `/api/portfolio/${username}/${portfolioId}`)
   console.log(result)
-  // if (!result) return <div>404</div>;
-  // console.log(result[0] , "herer eerererer")
-  // const TemplateComponent = templates["classic"]; 
+  if (!result) return <div>404</div>;
+  console.log(result[0] , "herer eerererer")
+  const TemplateComponent = templates["classic"]; 
 
-  // return <TemplateComponent 
-  // template={result[0]?.template}
-  //  title={result[0]?.title} 
-  //  bio={result[0]?.bio}
-  //   projects={result[0]?.projects} 
-  //   skills={result[0]?.skills}
-  //    contacts={result[0]?.contacts}  />;
+  return <TemplateComponent 
+  template={result[0]?.template}
+   title={result[0]?.title} 
+   bio={result[0]?.bio}
+    projects={result[0]?.projects} 
+    skills={result[0]?.skills}
+     contacts={result[0]?.contacts}  />;
 
-  return (
-    <div className="w-[400px] h-[400px] bg-black text-white">
-      {params.username}
-    </div>
-  )
 }
