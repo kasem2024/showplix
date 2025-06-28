@@ -12,7 +12,7 @@ export default function PortfolioList() {
   // return Login User 
    useEffect(() => {
         const fetchUser = async () => {
-          const res = await fetch('/api/auth/loginuser');
+          const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
           if (res.ok) {
             const data = await res.json();
             setUserName(data.user.username)
@@ -26,7 +26,7 @@ export default function PortfolioList() {
  // return Portfolios For The Login User
   useEffect(()=>{
     const  fetchPortfolios = async()=>{
-      const res =await fetch(`/api/portfolio/${userName}`);
+      const res =await fetch(`${process.env.BASE_URL}/api/portfolio/${userName}`);
           if(res.ok){
             const data = await res.json()
             console.log(data)
@@ -40,7 +40,7 @@ export default function PortfolioList() {
   const handleDelete = async (id:string)=>{
    console.log("delete" ,  id);
    try{
-   const res =  await fetch('/api/portfolio',{
+   const res =  await fetch(`${process.env.BASE_URL}/api/portfolio`,{
       method:"DELETE",
       headers: { 'Content-Type': 'application/json' },
       body:JSON.stringify({id})

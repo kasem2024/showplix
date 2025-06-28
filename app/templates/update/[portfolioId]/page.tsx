@@ -235,7 +235,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
   // Fetch user info
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch('/api/auth/loginuser');
+      const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
       if (res.ok) {
         const data = await res.json();
         setUserId(data?.user?.id);
@@ -251,7 +251,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
       if (!username || !portfolioId) return;
 
       try {
-        const res = await fetch(`/api/portfolio/${username}/${portfolioId}`);
+        const res = await fetch(`${process.env.BASE_URL}/api/portfolio/${username}/${portfolioId}`);
         const { result } = await res.json();
         const data = result[0];
         setForm({
@@ -327,7 +327,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
     e.preventDefault();
     setLoading(true);
 
-    const res = await fetch('/api/portfolio', {
+    const res = await fetch(`${process.env.BASE_URL}/api/portfolio`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, portfolioId }),
