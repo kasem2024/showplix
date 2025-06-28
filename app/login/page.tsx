@@ -47,8 +47,11 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await apiClient.post<LoginResponse, AxiosResponse<LoginResponse>, Form >("/api/auth/login", form);
-
+      const res = await fetch(`${process.env.BASE_URL}/api/auth/login`, {
+        method:"POST",
+        body:JSON.stringify(form)
+      });
+        console.log("sdfasdfdfasdafasddfsf _test_auth/login"  , res)
       if (res?.statusText === "OK") {
         router.push("/templates"); // Redirect after successful login
 
