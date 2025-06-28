@@ -10,6 +10,6 @@ export default async function PortfolioPage({ params }: { params: { username: st
   console.log(result[0] , "herer eerererer")
   const TemplateComponent = templates["classic"]; // fallback to classic
 
-  return <TemplateComponent template={result[0]?.template} title={result[0]?.title} bio={result[0]?.bio} projects={result[0]?.projects} skills={result[0]?.skills} contact={result[0]?.contact}  />;
+  return <TemplateComponent template={result[0]?.template} title={result[0]?.title} bio={result[0]?.bio} projects={result[0]?.projects} skills={result[0]?.skills} contacts={result[0]?.contacts}  />;
 
 }

@@ -16,11 +16,9 @@ type Skill = {
 };
 
 type ContactInfo = {
-  email?: string;
-  phone?: string;
-  website?: string;
-  linkedin?: string;
-  github?: string;
+ type?:string,
+ value?:string,
+ link?:string
 };
 
 type PortfolioTemplateProps = {
@@ -28,7 +26,7 @@ type PortfolioTemplateProps = {
   bio: string;         // Short intro or about me
   projects: Project[];
   skills: Skill[];
-  contact: ContactInfo;
+  contacts: ContactInfo[];
   template: string;
 };
 
@@ -38,7 +36,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-export default function ModernTemplate({ title, bio, projects, skills, contact }: PortfolioTemplateProps) {
+export default function ModernTemplate({ title, bio, projects, skills, contacts }: PortfolioTemplateProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-200 text-gray-900 px-6 py-10">
       <motion.header className="text-center mb-12" variants={fadeUp} initial="hidden" animate="visible">
@@ -75,13 +73,29 @@ export default function ModernTemplate({ title, bio, projects, skills, contact }
 
       <motion.section variants={fadeUp} initial="hidden" animate="visible">
         <h2 className="text-3xl font-semibold mb-6">Get In Touch</h2>
-        <div className="space-y-3 text-md">
-          {contact.email && <p>Email: <a href={`mailto:${contact.email}`} className="text-indigo-600">{contact.email}</a></p>}
-          {contact.phone && <p>Phone: {contact.phone}</p>}
-          {contact.website && <p>Website: <a href={contact.website} className="text-indigo-600" target="_blank">{contact.website}</a></p>}
-          {contact.linkedin && <p>LinkedIn: <a href={contact.linkedin} className="text-indigo-600" target="_blank">{contact.linkedin}</a></p>}
-          {contact.github && <p>GitHub: <a href={contact.github} className="text-indigo-600" target="_blank">{contact.github}</a></p>}
-        </div>
+        <ul className="space-y-4 text-lg w-full text-center">
+          {
+            contacts.map((contact , i)=>{
+              if(contact.type === "email")
+                    return(
+                      <li>
+                          {contact.type}:{' '}
+                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
+                            {contact.value}
+                          </a>
+                        </li>
+                    )
+              return (
+                 <li>
+                      {contact.type}:{' '}
+                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
+                        {contact.value}
+                      </a>
+                    </li>
+              )
+            })
+          }
+        </ul>
       </motion.section>
     </div>
   );

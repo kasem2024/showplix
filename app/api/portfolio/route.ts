@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { portfolioId, title, bio, projects, template } = body;
+    const { portfolioId, title, bio, projects, template , skills, contacts } = body;
 
     // Validate required fields
     if (!portfolioId) {
@@ -89,6 +89,8 @@ export async function PUT(req: NextRequest) {
         bio,
         projects,
         template,
+        skills,
+        contacts,
       },
     });
 

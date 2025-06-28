@@ -17,11 +17,9 @@ type Skill = {
 };
 
 type ContactInfo = {
-  email?: string;
-  phone?: string;
-  website?: string;
-  linkedin?: string;
-  github?: string;
+ type:string;
+ value:string;
+ link:string
 };
 
 type PortfolioTemplateProps = {
@@ -29,12 +27,13 @@ type PortfolioTemplateProps = {
   bio: string;         // Short intro or about me
   projects: Project[];
   skills: Skill[];
-  contact: ContactInfo;
+  contacts: ContactInfo[];
   template: string;
 };
 
 
-export default function MinimalTemplate({ title, bio, projects, skills, contact }: PortfolioTemplateProps) {
+export default function MinimalTemplate({ title, bio, projects, skills, contacts }: PortfolioTemplateProps) {
+  console.log("sdfsfssdfs",contacts[0].type)
   return (
     <div className="min-h-screen bg-white text-gray-800 p-8 font-sans">
       <header className="text-center mb-12">
@@ -72,12 +71,28 @@ export default function MinimalTemplate({ title, bio, projects, skills, contact 
 
       <section>
         <h2 className="text-2xl font-semibold border-b pb-2 mb-4">Contact</h2>
-        <ul className="text-sm space-y-2">
-          {contact.email && <li>Email: <a href={`mailto:${contact.email}`} className="text-blue-600">{contact.email}</a></li>}
-          {contact.phone && <li>Phone: {contact.phone}</li>}
-          {contact.website && <li>Website: <a href={contact.website} className="text-blue-600" target="_blank" rel="noreferrer">{contact.website}</a></li>}
-          {contact.linkedin && <li>LinkedIn: <a href={contact.linkedin} className="text-blue-600" target="_blank" rel="noreferrer">{contact.linkedin}</a></li>}
-          {contact.github && <li>GitHub: <a href={contact.github} className="text-blue-600" target="_blank" rel="noreferrer">{contact.github}</a></li>}
+       <ul className="space-y-4 text-lg w-full text-center">
+          {
+            contacts.map((contact , i)=>{
+              if(contact.type === "email")
+                    return(
+                      <li>
+                          {contact.type}:{' '}
+                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
+                            {contact.value}
+                          </a>
+                        </li>
+                    )
+              return (
+                 <li>
+                      {contact.type}:{' '}
+                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
+                        {contact.value}
+                      </a>
+                    </li>
+              )
+            })
+          }
         </ul>
       </section>
     </div>

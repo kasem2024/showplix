@@ -16,10 +16,11 @@ export async function POST(req: NextRequest) {
     const user = await prisma.user.create({
       data: { email, username, password: hashedPassword },
     });
-
     return NextResponse.json({ success: true, user: { id: user.id, email: user.email, username: user.username } });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
+
   }
 }
 6

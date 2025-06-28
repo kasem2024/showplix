@@ -14,11 +14,9 @@ type Skill = {
 };
 
 type ContactInfo = {
-  email?: string;
-  phone?: string;
-  website?: string;
-  linkedin?: string;
-  github?: string;
+  type:string;
+  value:string;
+  link:string
 };
 
 type PortfolioTemplateProps = {
@@ -26,7 +24,7 @@ type PortfolioTemplateProps = {
   bio: string;         // Short intro or about me
   projects: Project[];
   skills: Skill[];
-  contact: ContactInfo;
+  contacts: ContactInfo[];
   template: string;
 };
 
@@ -44,10 +42,14 @@ export default function PortfolioTemplate({
   bio,
   projects,
   skills,
-  contact,
-  template,
+  contacts,
+
 }: PortfolioTemplateProps) {
+
+  console.log(contacts[0].type)
 return (
+
+  
   <div className={` w-screen `}>
     
     {/* Hero Section */}
@@ -144,55 +146,28 @@ return (
     >
       <div className="max-w-md w-full flex flex-col justify-center items-center">
         <h2 className="text-4xl font-semibold mb-6 border-b border-white pb-3 w-full text-center">Contact</h2>
-        <ul className="space-y-4 text-lg w-full text-center">
-          {contact?.email && (
-            <li>
-              Email:{' '}
-              <a href={`mailto:${contact.email}`} className="underline hover:text-indigo-300">
-                {contact.email}
-              </a>
-            </li>
-          )}
-          {contact?.phone && <li>Phone: {contact.phone}</li>}
-          {contact?.website && (
-            <li>
-              Website:{' '}
-              <a
-                href={contact.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-indigo-300"
-              >
-                {contact.website}
-              </a>
-            </li>
-          )}
-          {contact?.linkedin && (
-            <li>
-              LinkedIn:{' '}
-              <a
-                href={contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-indigo-300"
-              >
-                {contact.linkedin}
-              </a>
-            </li>
-          )}
-          {contact?.github && (
-            <li>
-              GitHub:{' '}
-              <a
-                href={contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-indigo-300"
-              >
-                {contact.github}
-              </a>
-            </li>
-          )}
+         <ul className="space-y-4 text-lg w-full text-center">
+          {
+            contacts.map((contact , i)=>{
+              if(contact.type === "Email")
+                    return(
+                      <li>
+                          {contact.type}:{' '}
+                          <a href={`mailto:${contact.value}`} className="underline hover:text-indigo-300">
+                            {contact.value}
+                          </a>
+                        </li>
+                    )
+              return (
+                 <li>
+                      {contact.type}:{' '}
+                      <a href={`${contact.link}`} className="underline hover:text-indigo-300">
+                        {contact.value}
+                      </a>
+                    </li>
+              )
+            })
+          }
         </ul>
       </div>
     </motion.section>
@@ -200,3 +175,53 @@ return (
 );
 
 }
+
+
+// contacts[0]?.type && (
+//             <li>
+//               Email:{' '}
+//               <a href={`mailto:${contacts[0].value}`} className="underline hover:text-indigo-300">
+//                 {contacts[0].value}
+//               </a>
+//             </li>
+//           )}
+//           {contacts[0]?.type && <li>Phone: {contacts[0].value}</li>}
+//           {contacts[0]?.type && (
+//             <li>
+//               Website:{' '}
+//               <a
+//                 href={contacts[0].value}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="underline hover:text-indigo-300"
+//               >
+//                 {contacts[0].value}
+//               </a>
+//             </li>
+//           )}
+//           {contacts[0]?.type && (
+//             <li>
+//               LinkedIn:{' '}
+//               <a
+//                 href={contacts[0].value}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="underline hover:text-indigo-300"
+//               >
+//                 {contacts[0].value}
+//               </a>
+//             </li>
+//           )}
+//           {contacts[0]?.type && (
+//             <li>
+//               GitHub:{' '}
+//               <a
+//                 href={contacts[0].value}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className="underline hover:text-indigo-300"
+//               >
+//                 {contacts[0].value}
+//               </a>
+//             </li>
+//           )

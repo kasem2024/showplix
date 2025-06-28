@@ -29,13 +29,11 @@ const  TemplateLiveDemo= ({params}:{params:{template:TemplateNames}}) => {
      { name: "React", level: "Advanced" },
      { name: "Node.js", level: "Advanced" },
    ]}
-   contact={{
-     email: "jane@example.com",
-     phone: "+1234567890",
-     website: "https://janedoe.dev",
-     linkedin: "https://linkedin.com/in/janedoe",
-     github: "https://github.com/janedoe",
-   }}
+   contacts={[{
+     type: "jane@example.com",
+     value: "kasem2023mohareb@gmail.com",
+     link:''
+   }]}
    template="classic"/>;
    </div>
 }

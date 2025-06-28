@@ -201,6 +201,7 @@ type Skill = {
 type Contact = {
   type: string;
   value: string;
+  link:string
 };
 
 type PortfolioForm = {
@@ -310,6 +311,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
   const handleSkillChange = (i: number, field: keyof Skill, value: string) => {
     const updated = [...form.skills];
     updated[i][field] = value;
+    console.log("from handleSkillChange" , updated)
     setForm({ ...form, skills: updated });
   };
   const addSkill = () => setForm({ ...form, skills: [...form.skills, { name: '', icon: '' }] });
@@ -319,7 +321,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
     updated[i][field] = value;
     setForm({ ...form, contacts: updated });
   };
-  const addContact = () => setForm({ ...form, contacts: [...form.contacts, { type: '', value: '' }] });
+  const addContact = () => setForm({ ...form, contacts: [...form.contacts, { type: '', value: '' ,link:'' }] });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -440,6 +442,13 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
                 placeholder="Value"
                 value={contact.value}
                 onChange={(e) => handleContactChange(i, 'value', e.target.value)}
+                className="flex-1 p-2 border rounded"
+              />
+                 <input
+                type="text"
+                placeholder="Link"
+                value={contact.link}
+                onChange={(e) => handleContactChange(i, 'link', e.target.value)}
                 className="flex-1 p-2 border rounded"
               />
             </div>
