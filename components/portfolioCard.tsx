@@ -37,7 +37,7 @@ const PortfolioCard: FC<Portfolio> = ({ id, title, createdAt, username , handleD
 
       <div className="flex justify-between mt-4">
         <Link
-          href={`/${username}/${id}`}
+          href={`portfolio/${username}/${id}`}
           className="bg-purple-600 text-white px-2 py-1 rounded-xl hover:bg-purple-700 transition"
         >
           Visit

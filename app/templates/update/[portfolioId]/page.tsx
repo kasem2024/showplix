@@ -336,7 +336,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
     setLoading(false);
 
     if (res.ok) {
-      router.push(`/${username}/${portfolioId}`);
+      router.push(`/portfolio/${username}/${portfolioId}`);
     } else {
       alert('Failed to update. Please try again.');
     }
