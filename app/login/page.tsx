@@ -3,22 +3,22 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { apiClient } from "@/lib/apiClient";
-import { AxiosResponse } from "axios";
+// import { apiClient } from "@/lib/apiClient";
+// import { AxiosResponse } from "axios";
 
 
-type Form = {
-  username:string,
-  password:string,
-}
-type User = {
-  id:number ,
-  email:string,
-}
-type LoginResponse = {
-  success:boolean,
-  user:User
-}
+// type Form = {
+//   username:string,
+//   password:string,
+// }
+// type User = {
+//   id:number ,
+//   email:string,
+// }
+// type LoginResponse = {
+//   success:boolean,
+//   user:User
+// }
 
 export default function LoginPage() {
   const router = useRouter();
