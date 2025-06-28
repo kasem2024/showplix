@@ -327,7 +327,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ portfo
     e.preventDefault();
     setLoading(true);
 
-    const res = await fetch(`${process.env.BASE_URL}/api/portfolio`, {
+    const res = await fetch(`/api/portfolio`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, portfolioId }),

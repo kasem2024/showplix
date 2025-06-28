@@ -135,7 +135,7 @@ const handleImageUpload = async (
       return;
     }
 
-    const res = await fetch(`${process.env.BASE_URL}/api/portfolio`, {
+    const res = await fetch(`/api/portfolio`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, userId }),

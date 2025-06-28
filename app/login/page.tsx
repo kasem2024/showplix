@@ -29,7 +29,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         const fetchUser = async () => {
-          const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
+          const res = await fetch(`/api/auth/loginuser`);
           if (res.ok) {
             await res.json();
            router.push('/templates')
@@ -47,12 +47,12 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.BASE_URL}/api/auth/login`, {
+      const res = await fetch(`/api/auth/login`, {
         method:"POST",
         body:JSON.stringify(form)
       });
         console.log("sdfasdfdfasdafasddfsf _test_auth/login"  , res)
-      if (res?.statusText === "OK") {
+      if (res?.ok) {
         router.push("/templates"); // Redirect after successful login
 
       } else {
