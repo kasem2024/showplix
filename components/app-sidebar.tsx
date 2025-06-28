@@ -43,7 +43,7 @@ export function AppSidebar() {
   const  router =useRouter()
     useEffect(() => {
         const fetchUser = async () => {
-          const res = await fetch('/api/auth/loginuser');
+          const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
           if (res.ok) {
             const data = await res.json();
     
@@ -53,10 +53,10 @@ export function AppSidebar() {
           }
         };
         fetchUser();
-      }, []);
+      }, [router]);
 
     const handleLogout = async()=>{
-        await fetch('/api/auth/logout',{
+        await fetch(`${process.env.BASE_URL}/api/auth/logout`,{
         method:"post",
       })
 
