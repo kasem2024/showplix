@@ -29,7 +29,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         const fetchUser = async () => {
-          const res = await fetch('/api/auth/loginuser');
+          const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
           if (res.ok) {
             await res.json();
            router.push('/templates')
