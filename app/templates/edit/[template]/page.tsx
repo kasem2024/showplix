@@ -50,7 +50,7 @@ export default function EditPortfolioForm({ params }: { params: Promise<{ templa
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(`${process.env.BASE_URL}/api/auth/loginuser`);
+      const res = await fetch(`/api/auth/loginuser`);
       if (res.ok) {
         const data = await res.json();
         setUserId(data?.user?.id);
@@ -81,7 +81,7 @@ const handleImageUpload = async (
   reader.onloadend = async () => {
     const base64 = reader.result;
 
-    const res = await fetch(`${process.env.BASE_URL}/api/upload`, {
+    const res = await fetch(`/api/upload`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: base64 }),
