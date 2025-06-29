@@ -16,6 +16,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "showplix",
   description: "built by Mousa.dev",
+  icons:{
+    icon:"/favicon.svg"
+  }
 };
 
 export default function RootLayout({
