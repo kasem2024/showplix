@@ -1,6 +1,5 @@
 
 import { templates } from '@/component/templates';
-import { apiClient } from '@/lib/apiClient';
 
 interface Props {
   params: {
@@ -8,37 +7,15 @@ interface Props {
     portfolioId: string;
   };
 }
-type Project = {
-  name: string;
-  description: string;
-  link?: string;
-  image?: string; // URL for dummy image
-};
 
-type Skill = {
-  name: string;
-  icon?: string; // e.g. Beginner, Intermediate, Expert
-};
-
-type ContactInfo = {
-  type:string;
-  value:string;
-  link:string
-};
-
-interface PortfolioData {
-  template: string;
-  title: string;
-  bio: string;
-  projects: Project[]; // Replace 'any' with a proper project type if available
-  skills: Skill[];
-  contacts: ContactInfo[];
-}
-export default async  function Page({ params }:Props ) {
-
+export default async function Page({ params }:Props ) {
   const {username , portfolioId} = params
-  const {data:{result}} = await apiClient.get<{ result: PortfolioData[] }>( `/api/portfolio/${username}/${portfolioId}`)
-  console.log(result)
+  
+  const res = await fetch( `${process.env.NEXT_PUBLIC_BASE_URL}/api/portfolio/${username}/${portfolioId}`, {
+    method:"GET"
+  })
+  const { result} = await res.json()
+
   if (!result) return <div>404</div>;
   console.log(result[0] , "herer eerererer")
   const TemplateComponent = templates["classic"]; 

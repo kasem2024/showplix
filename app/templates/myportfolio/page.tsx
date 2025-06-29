@@ -22,7 +22,7 @@ export default function PortfolioList() {
           }
         };
         fetchUser();
-      }, []);
+      }, [router]);
  // return Portfolios For The Login User
   useEffect(()=>{
     const  fetchPortfolios = async()=>{
@@ -53,7 +53,7 @@ export default function PortfolioList() {
    }
   }
 
- if(portfolios.length === 0 ){
+ if(portfolios?.length === 0 ){
   return (
     
   <div className="w-screen h-screen grid place-items-center">

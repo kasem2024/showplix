@@ -9,12 +9,12 @@ const   TemplateLiveDemo= ({params}:{params:{template:TemplateNames}}) => {
      
   const validTemplates: TemplateNames[] = ["classic", "modern", "minimal"];
 
-  if (!validTemplates.includes(params.template as TemplateNames)) {
+  if (!validTemplates.includes(params?.template as TemplateNames)) {
     return <div className='w-screen h-screen flex justify-center items-center'>
       <p className='text-base md:text-lg lg:text-xl xl:text-2xl text-neutral-700'>There is no template with this name.</p>
     </div>;
   }
-   const TemplateComponent = templates[params.template]; // fallback to classic
+   const TemplateComponent = templates[params?.template]; // fallback to classic
  
    return <div>
     <div className='fixed top-6 right-12'><Link href={`/templates/edit/${params.template}`} className='p-2 bg-blue-500 rounded-sm text-white'>Edit</Link>
